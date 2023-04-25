@@ -11,8 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class PersonInfoMapper implements InformationMapper{
-
+public class PersonInfoMapper implements PersonInfoMapperInterface {
     @Resource
     private JdbcTemplate jdbcTemplate;
 
@@ -52,7 +51,7 @@ public class PersonInfoMapper implements InformationMapper{
         String imagePath = "static/user/image/avatar/"+number+".png";
         String path = new ClassPathResource(imagePath).getURL().getPath();
         byte[] imageByte = ImageLoader.getImageByte(path);
-        jsonObject.put("data", imageByte);
+        jsonObject.put("base64", imageByte);
         return jsonObject;
     }
 
@@ -62,7 +61,7 @@ public class PersonInfoMapper implements InformationMapper{
         String number = id.split("_")[1];
         String imagePath = "static/user/image/background/"+number+".png";
         String path = new ClassPathResource(imagePath).getURL().getPath();
-        jsonObject.put("data", ImageLoader.getImageByte(path));
+        jsonObject.put("base64", ImageLoader.getImageByte(path));
         return jsonObject;
     }
 }

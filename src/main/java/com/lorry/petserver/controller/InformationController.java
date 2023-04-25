@@ -1,12 +1,13 @@
 package com.lorry.petserver.controller;
 
 
-import com.lorry.petserver.service.information.InformationService;
+import com.alibaba.fastjson.JSONObject;
+import com.lorry.petserver.service.information.PersonInfoServiceInterface;
 import com.lorry.petserver.utils.message.ResponseMessage;
 import jakarta.annotation.Resource;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -14,26 +15,29 @@ import org.springframework.web.bind.annotation.RestController;
 public class InformationController {
 
     @Resource
-    private InformationService informationService;
+    private PersonInfoServiceInterface informationService;
 
-    @RequestMapping(value = "/info", method = RequestMethod.GET,params = {"id"})
+    @RequestMapping(value = "/info", method = RequestMethod.POST)
     public ResponseMessage getUserInformation(
-            @RequestParam(value = "id") String ID
+            @RequestBody JSONObject body
     ) {
+        String ID = body.getString("ID");
         return informationService.getUserInfo(ID);
     }
 
-    @RequestMapping(value = "/info/avatar",method = RequestMethod.GET,params = {"id"})
+    @RequestMapping(value = "/info/avatar",method = RequestMethod.POST)
     public ResponseMessage getUserAvatarImage(
-            @RequestParam(value = "id") String ID
+            @RequestBody JSONObject body
     ){
+        String ID = body.getString("ID");
         return informationService.getUserAvatarImage(ID);
     }
 
-    @RequestMapping(value = "/info/background",method = RequestMethod.GET,params = {"id"})
+    @RequestMapping(value = "/info/background",method = RequestMethod.POST)
     public ResponseMessage getUserBackgroundImage(
-            @RequestParam(value = "id") String ID
+            @RequestBody JSONObject body
     ){
+        String ID = body.getString("ID");
         return informationService.getUserBackgroundImage(ID);
     }
 

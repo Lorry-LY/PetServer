@@ -105,6 +105,13 @@
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
 
+
+<!--        导入测试模块依赖-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
